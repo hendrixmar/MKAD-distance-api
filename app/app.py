@@ -1,12 +1,14 @@
 from flask import Flask
 from cordinate_distance import example_blueprint
+import os
+
 app = Flask(__name__)
 app.register_blueprint(example_blueprint)
 
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return os.environ.get('API_YANDEX_KEY', None)
 
 
 if __name__ == '__main__':
