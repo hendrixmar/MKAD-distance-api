@@ -1,14 +1,15 @@
 from flask import Flask
-from cordinate_distance import example_blueprint
+from routes import bp
 import os
 
 app = Flask(__name__)
-app.register_blueprint(example_blueprint)
+app.register_blueprint(bp)
 
 
-@app.route('/')
-def hello_world():
-    return os.environ.get('API_YANDEX_KEY', None)
+
+@app.route('/<name>')
+def hello_world(name):
+    return "Welcome to MKAD distance API"+ name
 
 
 if __name__ == '__main__':
