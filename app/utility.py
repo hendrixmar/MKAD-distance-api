@@ -1,7 +1,8 @@
 import re
 import logging
 
-logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.INFO)
+
+logging.basicConfig(handlers=[logging.FileHandler('example.log', 'r+', 'utf-8')])
 LOG = logging.getLogger(__name__)
 
 def sanatize(input_string : str) -> str:

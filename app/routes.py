@@ -10,7 +10,10 @@ bp = Blueprint('example_blueprint', __name__)
 def index(address: str):
 
     # .info('Mostrando los posts del blog')
-    LOG.info("Call health ok "+address)
+    LOG.info("Call health ok {}")
     result = calculate_distance(address)
 
-    return address
+    if 0 < result:
+        return f"Distance from {address} to MKAD: {result}KM"
+    else:
+        return f"{address} is inside of MKAD"
