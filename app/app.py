@@ -6,10 +6,9 @@ app = Flask(__name__)
 app.register_blueprint(bp)
 
 
-
 @app.route('/<name>')
 def hello_world(name):
-    return "Welcome to MKAD distance API"+ name
+    return "Welcome to MKAD distance API" + name
 
 
 if __name__ == '__main__':

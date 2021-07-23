@@ -7,3 +7,5 @@ MarkupSafe==2.0.1
 numpy==1.21.1
 Werkzeug==2.0.1
 shapely
+pytest
+requests
