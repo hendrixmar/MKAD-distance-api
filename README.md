@@ -98,15 +98,15 @@ So I thought to use euclidean distance but that will make no sense because I'm n
 
 ![Earth great circle](https://i2.wp.com/macalupu.com/wp-content/uploads/2019/03/haversineFormula.png?w=878&ssl=1)
 
-The next step was to determine if the address that the user input to the API is inside the Moscow Ring Road. 
+The next step was to determine if the coordinate location address is inside the Moscow Ring Road. 
 My first approach to tackle this challenge was to take advantage of the metadata data that Yandex API returns. And compare the list of all the districts that are inside the MKAD with the district of the address.
 But I found another approach. The idea was to get all the coordinate points that surround the region to see it as a polygon and then apply an algorithm to identify if the point is inside of it
 
+![Test Image 2](images/mkad_map.png?raw=true)
 
 
-
-
-
+I used the website https://www.findlatitudeandlongitude.com/ to get the coordinates points and to make the work of saving the points quicker I created a Javascript function that store coordinates
+in a list after pressing the button "A" and if you have miss clicked you can erase the last data saved by pressing "D". To make it works you only need to open the dev tools and paste it in the console to make it work. Dont worry it doesnt do anything else than extracting and saving points.
 ````js
 
 let points = []
@@ -121,8 +121,6 @@ document.addEventListener('keyup', (e) => {
         let temp = points.pop();
         console.log(`Deleted: ${temp[0]},${temp[1]}`)
     }
-
-
   });
 ````
 - Import a HTML file and watch it magically convert to Markdown

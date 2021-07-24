@@ -1,6 +1,7 @@
 import numpy as np
 from shapely.geometry import Point
-
+import os
+import csv
 
 def haversine_distance(coordinate: Point) -> float:
     """
@@ -34,11 +35,18 @@ def haversine_distance(coordinate: Point) -> float:
     # Return the result multiplied by world radius
     return rad * c
 
-
-
-
 def test_answer():
-    assert 3 == 3
+
+    cwd = os.getcwd()
+    with open(f"{cwd}\\app\\test\\locations_test.csv") as test_cases:
+        csv_reader = csv.reader(test_cases, delimiter=',')
+        counter = 1
+        for x, y, expected_result in csv_reader:
+            x, y, expected_result = float(x), float(y), "True" == expected_result
+
+
+
+            counter += 1
 
 
 
