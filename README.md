@@ -5,7 +5,9 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-MKAD distance API gives you the distance between the address you make the request and the Moscow Ring Road (also know as MKAD). The information of the address is obtain by using the Yandex Geocode API.
+MKAD distance API gives you the distance between the address 
+ passed to the application in an HTTP request and the Moscow Ring Road (also known as MKAD). 
+The information of the address is obtained by using the Yandex Geocode API.
 
 
 
@@ -84,7 +86,7 @@ $ heroku container:push web --app <app-name>
 $ heroku container:release web --app <app-name>
 
 ```
-If you want to access to the logs of the Docker container use the following command.
+If you want to access to the logs file of the Docker container use the following command.
 ````shell
 $ heroku run bash
 ````
@@ -92,7 +94,7 @@ $ heroku run bash
 ## How it works?
 ![Earth great circle](https://i.imgur.com/iD3X3Ax.png)
 
-When I start working in the project divided the problem in two. The first problem was how to measure the distance between two coordinates points.
+The first problem was how to measure the distance between two coordinates points.
 So I thought to use euclidean distance but that will make no sense because I'm not flat-Earther, so I searched for a more viable solution. After some research I found the haversine formula gives great-circle distances between two points on a sphere from their longitudes and latitudes. The sphere in this case is the surface of the Earth.
 
 

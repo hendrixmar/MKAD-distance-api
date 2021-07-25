@@ -6,10 +6,10 @@ from shapely.geometry import Point
 from utility import sanatize_string, MKAD_REGION
 from yandex_geocode_model import GeocodeYandexPoint
 
-__api_key__ = os.environ.get('API_YANDEX_KEY', None)
+__api_key__ = os.environ.get('API_YANDEX_KEY_2', None)
 
 
-def calculate_distance(address: str) -> float:
+def calculate_distance(address: str) -> {}:
     """
 
         :param address:
@@ -21,6 +21,7 @@ def calculate_distance(address: str) -> float:
         return -2.0
 
     address_point = GeocodeYandexPoint(json_request)
+
     if address_point.within(MKAD_REGION):
         return -1.0
     else:
