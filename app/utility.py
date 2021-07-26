@@ -11,7 +11,6 @@ flask_logger = logging.getLogger(__name__)
 def sanitize_string(input_string: str) -> str:
 	return re.sub(r'[\\\!"\#\$%\&\'()\*,-./\:;<=>\?\@\[\]^^_`\{\|\}~+¡\ ]+', "+", input_string)
 
-
 MKAD_POINTS = [(37.592099, 55.576016),
 			   (37.568613, 55.582226),
 			   (37.54767, 55.586301),
