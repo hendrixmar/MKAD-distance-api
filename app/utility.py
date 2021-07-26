@@ -1,15 +1,15 @@
 import re
 import logging
 from shapely.geometry import  Polygon, Point
+import string
 
-logging.basicConfig(handlers=[logging.FileHandler('example.log', 'r+', 'utf-8')])
+
+logging.basicConfig(filename='MKAD_info.log', level=logging.INFO, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 flask_logger = logging.getLogger(__name__)
 
 
-def sanatize_string(input_string: str) -> str:
-    input_string = re.sub("[<>*%&:?\ ]", "+", input_string)
-
-    return input_string
+def sanitize_string(input_string: str) -> str:
+ return re.sub('[\\\!"\#\$%\&\'()\*,-./\:;<=>\?\@\[\]^^_`\{\|\}~+¡\ ]+', "+", input_string)
 
 
 

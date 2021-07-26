@@ -3,45 +3,48 @@ from functools import reduce
 import numpy as np
 import requests
 from shapely.geometry import Point
-from utility import sanatize_string, MKAD_REGION
+from utility import sanitize_string, MKAD_REGION, flask_logger
 from yandex_geocode_model import GeocodeYandexPoint
 
 __api_key__ = os.environ.get('API_YANDEX_KEY_2', None)
 
-
 def calculate_distance(address: str) -> {}:
     """
-
-        :param address:
-        :return: metadata of the address
-    """
-    json_request = yandex_geocode_api(address)
-
-    if json_request == {}:
-        return -2.0
-
-    address_point = GeocodeYandexPoint(json_request)
-
-    if address_point.within(MKAD_REGION):
-        return -1.0
-    else:
-        return haversine_distance(address_point)
-
-
-def yandex_geocode_api(address: str) -> {}:
-    """
-        Gets the metadata if the input address by doint a http request to yandex geocode api
+        Connect the different components of the logic of the API
 
             :param address:
             :return: metadata of the address
     """
-    address_sanitised = sanatize_string(address)
-    http_response = requests.get(
-        f"https://geocode-maps.yandex.ru/1.x/"
-        f"?apikey={__api_key__}&"
-        f"geocode={address_sanitised}&"
-        f"lang=en-US&"
-        f"format=json")
+    json_request = yandex_geocode_api(address)
+
+    if "status" in json_request:
+        return json_request
+
+    address_point = GeocodeYandexPoint(json_request)
+
+    if address_point.within(MKAD_REGION):
+        return {"status": "address is located inside MKAD"}
+    else:
+        return {"distance" : haversine_distance(address_point) }
+
+def yandex_geocode_api(address: str) -> {}:
+    """
+        Gets the metadata if the input address by doing a http request to yandex geocode api
+
+            :param address:
+            :return: metadata of the address
+    """
+    address_sanitised = sanitize_string(address)
+
+    try:
+        http_response = requests.get(
+            f"https://geocode-maps.yandex.ru/1.x/"
+            f"?apikey={__api_key__}&"
+            f"geocode={address_sanitised}&"
+            f"lang=en-US&"
+            f"format=json")
+    except:
+        flask_logger.exception("HTTP call exception")
 
     if http_response.status_code == 200:
         json_data = http_response.json()
@@ -51,11 +54,10 @@ def yandex_geocode_api(address: str) -> {}:
         key_path = ["response", "GeoObjectCollection", "metaDataProperty", "GeocoderResponseMetaData", "found"]
         result = reduce(lambda p, c: p[c], key_path, json_data)
 
-        return {} if result == "0" else json_data
+        return {"status": "error", "response" : "No metadata found"} if result == "0" else json_data
 
     else:
-        return {}
-
+        return {"status": "error",  "response" : f"HTTP error {http_response.status_code} from yandex API"}
 
 def haversine_distance(coordinate: Point) -> float:
     """
@@ -63,7 +65,6 @@ def haversine_distance(coordinate: Point) -> float:
 
             :param coordinate: shapely.geometry.point
             :return: haversine distance in km:
-
     """
     # MKAD coordinate
     lat1, lon1 = 55.755826, 37.6173
