@@ -119,7 +119,7 @@ document.addEventListener('keyup', (e) => {
 
 If you want to test this api you can try by using this link and replacing the address parameter a location name
 
-https://hendrikneuro.herokuapp.com/distance/<Address>
+https://hendrikneuro.herokuapp.com/distance/**Address**
 
 ## License
 

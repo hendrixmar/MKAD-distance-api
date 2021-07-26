@@ -5,7 +5,7 @@ import pytest
 
 
 def sanitize_string(input_string: str) -> str:
-	return re.sub('[\\\!"\#\$%\&\'()\*,-./\:;<=>\?\@\[\]^^_`\{\|\}~+¡\ ]+', "+", input_string)
+	return re.sub(r'[\\\!"\#\$%\&\'()\*,-./\:;<=>\?\@\[\]^^_`\{\|\}~+¡\ ]+', "+", input_string)
 
 
 def test_answer():

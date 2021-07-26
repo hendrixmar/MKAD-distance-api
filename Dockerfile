@@ -9,7 +9,6 @@ apt-get install -y python3-pip python3-dev build-essential
 
 # We copy just the requirements.txt first to leverage Docker cache
 COPY ./requirements.txt /app/requirements.txt
-COPY ./example.log /app/
 
 WORKDIR /app
 
