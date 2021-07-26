@@ -6,7 +6,7 @@ from shapely.geometry import Point
 from utility import sanitize_string, MKAD_REGION, flask_logger
 from yandex_geocode_model import GeocodeYandexPoint
 
-__api_key__ = os.environ.get('API_YANDEX_KEY_2', None)
+__api_key__ = "3ec41f5e-7b72-4301-8be5-76e9d96ab9ad" #os.environ.get('API_YANDEX_KEY_2', None)
 
 def calculate_distance(address: str) -> {}:
     """
@@ -23,9 +23,9 @@ def calculate_distance(address: str) -> {}:
     address_point = GeocodeYandexPoint(json_request)
 
     if address_point.within(MKAD_REGION):
-        return {"status": "address is located inside MKAD"}
+        return {"response": "address is located inside MKAD"}
     else:
-        return {"distance" : haversine_distance(address_point) }
+        return {"distance": haversine_distance(address_point)}
 
 def yandex_geocode_api(address: str) -> {}:
     """
@@ -45,6 +45,8 @@ def yandex_geocode_api(address: str) -> {}:
             f"format=json")
     except:
         flask_logger.exception("HTTP call exception")
+        return {"status": "error", "response" : "Yandex http exception"}
+
 
     if http_response.status_code == 200:
         json_data = http_response.json()
