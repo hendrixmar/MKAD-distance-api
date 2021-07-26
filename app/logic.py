@@ -6,7 +6,7 @@ from shapely.geometry import Point
 from utility import sanitize_string, MKAD_REGION, flask_logger
 from yandex_geocode_model import GeocodeYandexPoint
 
-__api_key__ = os.environ.get('API_YANDEX_KEY_2', None)
+__api_key__ = "3ec41f5e-7b72-4301-8be5-76e9d96ab9ad" #os.environ.get('API_YANDEX_KEY_2', None)
 
 def calculate_distance(address: str) -> {}:
     """
