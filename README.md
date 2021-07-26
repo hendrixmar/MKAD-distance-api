@@ -23,6 +23,11 @@ The API is works with the following libraries
 - [requests] - a simple, yet elegant, HTTP library.
 
 
+## DEMO
+
+If you want to test this api you can try by using this link and replacing the address parameter a location name
+
+https://hendrikneuro.herokuapp.com/distance/**Address**
 
 
 ## Installation
@@ -65,7 +70,7 @@ $ docker build -t <your username>/flask-docker .
 $ docker run -it -p 2000:5000 <your username>/flask-docker
 ```
 
-I deploy the application to Heroku. If you want to use the same platform create your account and excecute the following commands. Deploying in heroku is pretty straightforward.
+I deployed the application to Heroku. If you want to use the same platform create your account and execute the following commands. Deploying in heroku is pretty straightforward.
 
 ```sh
 $ heroku login
@@ -115,11 +120,6 @@ document.addEventListener('keyup', (e) => {
     }
   });
 ````
-## DEMO
-
-If you want to test this api you can try by using this link and replacing the address parameter a location name
-
-https://hendrikneuro.herokuapp.com/distance/**Address**
 
 ## License
 
